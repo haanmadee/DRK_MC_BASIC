@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --primary: #821131;
+    --paper: #fdfbf7;
+    --text: #1a1a1a;
+    --accent: #d4a5a5; /* Pink dusty elegan */
+    --font-head: 'Playfair Display', serif;
+    --font-body: 'Poppins', sans-serif;
+  }
+
+  body {
+    margin: 0; padding: 0;
+    background-color: #eee;
+    font-family: var(--font-body);
+    color: var(--text);
+  }
+
+  .container {
+    max-width: 480px; margin: 0 auto;
+    background: var(--paper);
+    min-height: 100vh;
+    box-shadow: 0 0 50px rgba(0,0,0,0.08);
+    padding-bottom: 60px;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* --- HERO SECTION (MAGAZINE COVER STYLE) --- */
+  .hero-wrap {
+    position: relative;
+    padding: 20px 20px 0;
+    margin-bottom: 40px;
+  }
+
+  /* Frame Gambar Utama */
+  .hero-frame {
+    width: 100%;
+    height: 400px; /* Tinggi gambar */
+    background-color: #ddd; /* Placeholder color */
+    background-size: cover;
+    background-position: center;
+    border-radius: 100px 100px 0 0; /* Lengkungan atas ala jendela */
+    border: 1px solid var(--primary);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Elemen Dekorasi Garis */
+  .hero-border-decor {
+    position: absolute;
+    top: 35px; left: 35px; right: 35px; bottom: 0;
+    border: 1px solid rgba(255,255,255,0.5);
+    border-bottom: none;
+    border-radius: 80px 80px 0 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  /* Judul Menumpuk di Gambar */
+  .hero-title-group {
+    position: absolute;
+    bottom: -20px;
+    left: 0; right: 0;
+    text-align: center;
+    z-index: 3;
+  }
+
+  .title-small {
+    background: var(--primary); color: #fff;
+    display: inline-block; padding: 5px 15px;
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .title-main {
+    background: var(--paper);
+    padding: 15px 10px;
+    font-family: var(--font-head);
+    font-size: 32px;
+    line-height: 1;
+    color: var(--primary);
+    border-top: 1px solid var(--primary);
+    border-bottom: 1px solid var(--primary);
+    margin: 0 15px; /* Jarak kiri kanan */
+  }
+  
+  .title-main span {
+    display: block; font-style: italic; font-weight: 400; font-size: 24px; color: #555;
+  }
+
+  /* --- EDITORIAL TEXT --- */
+  .content-body {
+    padding: 40px 30px 20px;
+    text-align: center;
+  }
+
+  .drop-cap-text {
+    font-size: 13px; color: #555; line-height: 1.8; text-align: justify;
+  }
+
+  .drop-cap-text::first-letter {
+    float: left; font-family: var(--font-head);
+    font-size: 55px; line-height: 45px;
+    padding-right: 10px; color: var(--primary);
+  }
+
+  /* --- FEATURES (2 COLUMNS) --- */
+  .feature-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 15px; padding: 0 25px 30px;
+  }
+
+  .feat-card {
+    background: #fff; padding: 20px 15px;
+    border: 1px solid #eee; text-align: center;
+    border-radius: 8px; transition: transform 0.3s;
+  }
+  .feat-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+
+  .feat-icon { font-size: 24px; margin-bottom: 10px; display: block; }
+  .feat-head { font-family: var(--font-head); font-size: 14px; color: var(--primary); font-weight: 700; margin-bottom: 5px; }
+  .feat-desc { font-size: 10px; color: #777; line-height: 1.4; }
+
+  /* --- CURRICULUM (SINGLE COLUMN CLEAN) --- */
+  .curriculum-section {
+    padding: 30px 25px;
+    background: #fff0f3; /* Pink tipis banget */
+    margin: 20px 20px;
+    border-radius: 8px;
+    position: relative;
+    border: 1px dashed var(--primary);
+  }
+
+  .curr-badge {
+    position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+    background: var(--primary); color: #fff;
+    padding: 4px 15px; font-size: 10px; text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  .curr-item {
+    display: flex; align-items: center;
+    margin-bottom: 15px; padding-bottom: 15px;
+    border-bottom: 1px solid rgba(130, 17, 49, 0.1);
+  }
+  .curr-item:last-child { margin-bottom: 0; padding-bottom: 0; border: none; }
+
+  .curr-idx {
+    font-family: var(--font-head); font-size: 20px; font-style: italic;
+    color: var(--primary); margin-right: 15px; width: 20px;
+  }
+  .curr-txt {
+    font-size: 12px; color: #444; font-weight: 500;
+  }
+
+  /* --- WHATSAPP EXCLUSIVE --- */
+  .wa-section {
+    margin: 20px 25px; padding: 20px;
+    background: #25D366; /* Warna WA */
+    color: #fff; border-radius: 12px;
+    display: flex; align-items: center;
+    box-shadow: 0 10px 20px rgba(37, 211, 102, 0.2);
+  }
+  
+  .wa-icon { font-size: 30px; margin-right: 15px; }
+  .wa-text h4 { margin: 0; font-size: 14px; font-weight: 700; }
+  .wa-text p { margin: 3px 0 0; font-size: 10px; opacity: 0.9; }
+
+  /* --- FOOTER --- */
+  .footer {
+    text-align: center; margin-top: 40px;
+    font-family: var(--font-head); font-style: italic; color: var(--primary);
+    font-size: 12px;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="hero-wrap">
+    <div class="hero-frame" style="background-image: url('https://image2url.com/r2/default/images/1769781496380-f0b78418-ce13-4078-9a26-ce8ebce5c69f.png');">
+      <div class="hero-border-decor"></div>
+    </div>
+    
+    <div class="hero-title-group">
+      <span class="title-small">New Product Launch</span>
+      <div class="title-main">
+        MC Fundamentals
+        <span>Private Basic Class</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-body">
+    <div class="drop-cap-text">
+      Banyak yang mengira "Basic" itu sepele. Padahal, fondasi yang kuat adalah rahasia MC profesional terlihat tenang di panggung mana pun.
+      <br><br>
+      Kelas ini dirancang khusus untuk Nona yang baru mau mulai, atau sekadar ingin bisa <em>public speaking</em> di acara kasual (Arisan, Ulang Tahun, Rapat Kantor) tanpa gemetar. Kita mulai dari nol, tanpa penghakiman, dan pastinya seru!
+    </div>
+  </div>
+
+  <div class="feature-grid">
+    <div class="feat-card">
+      <span class="feat-icon">🎙️</span>
+      <div class="feat-head">Private Session</div>
+      <div class="feat-desc">1-on-1 via Zoom/Gmeet. Fokus ke kebutuhan dasar Nona.</div>
+    </div>
+    <div class="feat-card">
+      <span class="feat-icon">📚</span>
+      <div class="feat-head">PDF Materials</div>
+      <div class="feat-desc">Modul ringkas & padat. Contekan wajib pemula.</div>
+    </div>
+  </div>
+
+  <div class="curriculum-section">
+    <div class="curr-badge">What You'll Learn</div>
+    
+    <div class="curr-item">
+      <div class="curr-idx">01</div>
+      <div class="curr-txt">Mindset & Confidence Hacking (Anti-Grogi)</div>
+    </div>
+    <div class="curr-item">
+      <div class="curr-idx">02</div>
+      <div class="curr-txt">Teknik Dasar Vokal (Bulat & Jelas)</div>
+    </div>
+    <div class="curr-item">
+      <div class="curr-idx">03</div>
+      <div class="curr-txt">Struktur Script Acara Kasual (Non-Formal)</div>
+    </div>
+    <div class="curr-item">
+      <div class="curr-idx">04</div>
+      <div class="curr-txt">Gesture & Body Language Dasar</div>
+    </div>
+  </div>
+
+  <div class="wa-section">
+    <div class="wa-icon">💬</div>
+    <div class="wa-text">
+      <h4>Unlimited Q&A by WhatsApp</h4>
+      <p>Tanya jawab eksklusif personal. Bingung bikin teks? Voice note aja, nanti aku feedback!</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    Start your journey here,<br><strong>Nona!</strong> ✨
+  </div>
+
+</div>
+
+</body>
+</html>
